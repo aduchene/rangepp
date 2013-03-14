@@ -5,7 +5,7 @@
 using namespace std;
 
 int main(){
-    range test(6);
+    range<int> test(6);
     for(auto it=test.begin(); it!=test.end(); ++it){
         cout<<" "<<*it;
     }
@@ -19,21 +19,26 @@ int main(){
     }
     cout<<endl;
 
-    vector<range> tests;
-    tests.push_back(range(10,13));
-    tests.push_back(range(1,6,3));
-    tests.push_back(range(1,-6,-2));
+    vector<range<int>> tests;
+    tests.push_back(range<int>(10,13));
+    tests.push_back(range<int>(1,6,3));
+    tests.push_back(range<int>(1,-6,-2));
     int test_no=0;
-    for(range r:tests){
+    for(range<int> r:tests){
         cout<<"Test no "<<test_no++<<": ";
         for(int i:r){
             cout<<" "<<i;
         }
         cout<<endl;
     }
-    range r(90,-30,-6);
+    range<int> r(90,-30,-6);
     cout<<r[8]<<endl;
     cout<<*(r.begin()+8)<<endl;
     cout<<*(r.end()-(r.size()-8))<<endl;
+    range<float> fr(0,3,.23);
+    for(auto num:fr){
+        cout<<num<<" ";
+    }
+    cout<<endl;
     return 0;
 }

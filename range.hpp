@@ -1,33 +1,34 @@
 #include <iterator>
 
+template<typename value_t>
 class range{
     private:
-        const int rbegin;
-        const int rend;
-        int step_end;
-        const int step;
+        const value_t rbegin;
+        const value_t rend;
+        value_t step_end;
+        const value_t step;
     public:
-        range(int end): rbegin(0),rend(end),step(1),step_end(end){}
-        range(int begin, int end, int step=1):
+        range(value_t end): rbegin(0),rend(end),step(1),step_end(end){}
+        range(value_t begin, value_t end, value_t step=1):
             rbegin(begin),rend(end),step(step){
-            if((rend-rbegin)%step ==0){
+            if(static_cast<int>((rend-rbegin)/step)==((rend-rbegin)/step)){
                 step_end=end;
             }
             else{
-                int nsteps=(int)((rend-rbegin)/step);
+                value_t nsteps=(int)((rend-rbegin)/step);
                 step_end=step*(nsteps+1)+begin;
             }
         }
 
         class iterator:
-            public std::iterator<std::random_access_iterator_tag,int>
+            public std::iterator<std::random_access_iterator_tag,value_t>
         {
             private:
-                int c;
+                value_t c;
                 range& parent;
             public:
-                iterator(int start,range& parent): c(start), parent(parent){}
-                int operator*() {return c;}
+                iterator(value_t start,range& parent): c(start), parent(parent){}
+                value_t operator*() {return c;}
                 const iterator* operator++(){ c+=parent.step; return this; };
                 iterator operator++(int){
                     c+=parent.step;
@@ -55,7 +56,7 @@ class range{
             return iterator(step_end,*this);
         }
 
-        int operator[](int s){
+        value_t operator[](int s){
             return rbegin+s*step;
         }
 

@@ -12,8 +12,15 @@ class range{
 
         vector<int> operator()(){
             vector<int> list;
-            for(int i=begin;i<end;i+=step){
-                list.push_back(i);
+            if(step>0){
+                for(int i=begin;i<end;i+=step){
+                    list.push_back(i);
+                }
+            }
+            else{
+                    for(int i=begin;i>end;i+=step){
+                        list.push_back(i);
+                    }
             }
             return list;
         }

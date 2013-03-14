@@ -31,5 +31,9 @@ int main(){
         }
         cout<<endl;
     }
+    range r(90,-30,-6);
+    cout<<r[8]<<endl;
+    cout<<*(r.begin()+8)<<endl;
+    cout<<*(r.end()-(r.size()-8))<<endl;
     return 0;
 }

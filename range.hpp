@@ -20,7 +20,7 @@ class range{
         }
 
         class iterator:
-            public std::iterator<std::forward_iterator_tag,int>
+            public std::iterator<std::random_access_iterator_tag,int>
         {
             private:
                 int c;
@@ -35,6 +35,17 @@ class range{
                 }
                 bool operator==(const iterator& other) {return c==other.c;}
                 bool operator!=(const iterator& other) {return c!=other.c;}
+                iterator operator+(int s) {
+                    return iterator(parent.step*s+c,parent);
+                }
+                iterator operator-(int s){
+                    return iterator(c-parent.step*s,parent);
+                }
+                const iterator* operator--(){ c-=parent.step; return this;}
+                iterator operator--(int){
+                    c-=parent.step;
+                    return iterator(c-parent.step,parent);
+                }
         };
 
         iterator begin(){
@@ -42,5 +53,13 @@ class range{
         }
         iterator end(){
             return iterator(step_end,*this);
+        }
+
+        int operator[](int s){
+            return rbegin+s*step;
+        }
+
+        int size(){
+            return (int)((rend-rbegin)/step);
         }
 };

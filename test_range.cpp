@@ -40,5 +40,11 @@ int main(){
         cout<<num<<" ";
     }
     cout<<endl;
+    fr=range<float>(0,.99,.33);
+    for(auto num:fr){
+        cout<<num<<" ";
+    }
+    cout<<endl;
+
     return 0;
 }

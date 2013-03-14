@@ -5,9 +5,16 @@
 using namespace std;
 
 int main(){
-    auto r=bind(range,9);
-    for(int i : r()){
-        cout<<i<<endl;
+    vector< decltype(bind(range,9)) > tests;
+    tests.push_back(bind(range,9));
+    tests.push_back(bind(range,90));
+    int i=1;
+    for(auto& bound : tests){
+        cout<<"Test "<<i++<<": ";
+        for(auto num:bound()){
+            cout<<" "<<num;
+        }
+        cout<<endl;
     }
     return 0;
 }

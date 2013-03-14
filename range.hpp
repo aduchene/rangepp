@@ -1,4 +1,6 @@
 #include <vector>
+#include <boost/iterator/iterator_facade.hpp>
+
 using std::vector;
 
 class range{

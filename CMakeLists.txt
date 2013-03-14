@@ -3,6 +3,8 @@ project(cpp_range)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 -pthread")
 
+find_package(Boost)
+
 file(GLOB sources "*.cpp")
 
 foreach(src ${sources})

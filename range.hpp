@@ -1,15 +1,14 @@
 #include <iterator>
 
 template<typename value_t>
-class range{
+class range_impl{
     private:
         value_t rbegin;
         value_t rend;
         value_t step;
         int step_end;
     public:
-        range(value_t end): rbegin(0),rend(end),step(1),step_end(end){}
-        range(value_t begin, value_t end, value_t step=1):
+        range_impl(value_t begin, value_t end, value_t step=1):
             rbegin(begin),rend(end),step(step){
                 step_end=(rend-rbegin)/step;
                 if(rbegin+step_end*step != rend){
@@ -23,9 +22,9 @@ class range{
             private:
                 value_t current_value;
                 int current_step;
-                range& parent;
+                range_impl& parent;
             public:
-                iterator(int start,range& parent): current_step(start), parent(parent){current_value=parent.rbegin+current_step*parent.step;}
+                iterator(int start,range_impl& parent): current_step(start), parent(parent){current_value=parent.rbegin+current_step*parent.step;}
                 value_t operator*() {return current_value;}
                 const iterator* operator++(){
                     current_value+=parent.step;
@@ -82,3 +81,18 @@ class range{
             return step_end;
         }
 };
+
+template<typename vt,typename other>
+range_impl<vt> range(other begin, other end, vt stepsize){
+    return range_impl<vt>(begin,end,stepsize);
+}
+
+template<typename b,typename e>
+range_impl<e> range(b begin, e end){
+    return range_impl<e>(begin,end,1);
+}
+
+template<typename e>
+range_impl<e> range(e end){
+    return range_impl<e>(0,end,1);
+}

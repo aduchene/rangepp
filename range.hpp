@@ -1,27 +1,36 @@
-#include <vector>
-using std::vector;
+#include <iterator>
 
 class range{
     private:
-        const int begin;
-        const int end;
+        const int rbegin;
+        const int rend;
         const int step;
     public:
-        range(int end): begin(0),end(end),step(1) {}
-        range(int begin, int end, int step=1): begin(begin),end(end),step(step){}
+        range(int end): rbegin(0),rend(end),step(1) {}
+        range(int begin, int end, int step=1): rbegin(begin),rend(end),step(step){}
 
-        vector<int> operator()(){
-            vector<int> list;
-            if(step>0){
-                for(int i=begin;i<end;i+=step){
-                    list.push_back(i);
+        class iterator:
+            public std::iterator<std::forward_iterator_tag,int>
+        {
+            private:
+                int c;
+                range& parent;
+            public:
+                iterator(int start,range& parent): c(start), parent(parent){}
+                int operator*() {return c;}
+                const iterator* operator++(){ c+=parent.step; return this; };
+                iterator operator++(int){
+                    c+=parent.step;
+                    return iterator(c-parent.step,parent);
                 }
-            }
-            else{
-                    for(int i=begin;i>end;i+=step){
-                        list.push_back(i);
-                    }
-            }
-            return list;
+                bool operator==(const iterator& other) {return c==other.c;}
+                bool operator!=(const iterator& other) {return c!=other.c;}
+        };
+
+        iterator begin(){
+            return iterator(rbegin,*this);
+        }
+        iterator end(){
+            return iterator(rend,*this);
         }
 };

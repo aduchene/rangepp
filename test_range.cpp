@@ -5,20 +5,19 @@
 using namespace std;
 
 int main(){
-    vector<range> tests;
-    tests.push_back(range(0));
-    tests.push_back(range(7));
-    tests.push_back(range(67,80));
-    tests.push_back(range(67,80,2));
-    tests.push_back(range(10,0));
-    tests.push_back(range(10,0,-1));
-    int i=1;
-    for(auto& bound : tests){
-        cout<<"Test "<<i++<<": ";
-        for(auto num:bound()){
-            cout<<" "<<num;
-        }
-        cout<<endl;
+    range test(6);
+    for(auto it=test.begin(); it!=test.end(); ++it){
+        cout<<" "<<*it;
     }
+    cout<<endl;
+    for(int i:test){
+        cout<<i<<" ";
+    }
+    cout<<endl;
+    for(auto it=begin(test); it!=end(test); ++it){
+        cout<<" "<<*it;
+    }
+    cout<<endl;
+
     return 0;
 }

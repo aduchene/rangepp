@@ -1,10 +1,20 @@
 #include <vector>
 using std::vector;
 
-vector<int> range(int end){
-    vector<int> list;
-    for(int i=0;i<end;i++){
-        list.push_back(i);
-    }
-    return list;
-}
+class range{
+    private:
+        const int begin;
+        const int end;
+        const int step;
+    public:
+        range(int end): begin(0),end(end),step(1) {}
+        range(int begin, int end, int step=1): begin(begin),end(end),step(step){}
+
+        vector<int> operator()(){
+            vector<int> list;
+            for(int i=begin;i<end;i+=step){
+                list.push_back(i);
+            }
+            return list;
+        }
+};

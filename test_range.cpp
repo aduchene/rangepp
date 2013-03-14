@@ -5,9 +5,13 @@
 using namespace std;
 
 int main(){
-    vector< decltype(bind(range,9)) > tests;
-    tests.push_back(bind(range,9));
-    tests.push_back(bind(range,90));
+    vector<range> tests;
+    tests.push_back(range(0));
+    tests.push_back(range(7));
+    tests.push_back(range(67,80));
+    tests.push_back(range(67,80,2));
+    tests.push_back(range(10,0));
+    tests.push_back(range(10,0,-1));
     int i=1;
     for(auto& bound : tests){
         cout<<"Test "<<i++<<": ";

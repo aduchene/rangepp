@@ -4,10 +4,20 @@ class range{
     private:
         const int rbegin;
         const int rend;
+        int step_end;
         const int step;
     public:
-        range(int end): rbegin(0),rend(end),step(1) {}
-        range(int begin, int end, int step=1): rbegin(begin),rend(end),step(step){}
+        range(int end): rbegin(0),rend(end),step(1),step_end(end){}
+        range(int begin, int end, int step=1):
+            rbegin(begin),rend(end),step(step){
+            if((rend-rbegin)%step ==0){
+                step_end=end;
+            }
+            else{
+                int nsteps=(int)((rend-rbegin)/step);
+                step_end=step*(nsteps+1)+begin;
+            }
+        }
 
         class iterator:
             public std::iterator<std::forward_iterator_tag,int>
@@ -31,6 +41,6 @@ class range{
             return iterator(rbegin,*this);
         }
         iterator end(){
-            return iterator(rend,*this);
+            return iterator(step_end,*this);
         }
 };

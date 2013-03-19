@@ -83,16 +83,13 @@ class range_impl{
 };
 
 template<typename vt,typename other>
-auto range(other begin, other end, vt stepsize)->range_impl<decltype(begin+end+stepsize)>
-{
-    
-    return range_impl<decltype(begin+end+stepsize)>(begin,end,stepsize);
+range_impl<vt> range(other begin, other end, vt stepsize){
+    return range_impl<vt>(begin,end,stepsize);
 }
 
 template<typename b,typename e>
-auto range(b begin, e end) -> range_impl<decltype(begin+end)>
-{
-    return range_impl<decltype(begin+end)>(begin,end,1);
+range_impl<e> range(b begin, e end){
+    return range_impl<e>(begin,end,1);
 }
 
 template<typename e>

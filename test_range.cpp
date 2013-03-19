@@ -1,4 +1,5 @@
 #include "range.hpp"
+using namespace rangepp;
 
 #include <iostream>
 #include <vector>

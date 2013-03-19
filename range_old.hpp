@@ -1,5 +1,7 @@
 #include <iterator>
 
+namespace rangepp{
+
 template<typename value_t>
 class range_impl{
     private:
@@ -95,4 +97,5 @@ range_impl<e> range(b begin, e end){
 template<typename e>
 range_impl<e> range(e end){
     return range_impl<e>(0,end,1);
+}
 }

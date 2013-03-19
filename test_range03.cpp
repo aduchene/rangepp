@@ -2,7 +2,8 @@
 using std::cout;
 using std::endl;
 
-#include "range.hpp"
+#include "range_old.hpp"
+using namespace rangepp;
 
 int main(){
     cout<<"Printing range(0,8,3) c++03 style: ";
